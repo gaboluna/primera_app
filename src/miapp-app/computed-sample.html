@@ -1,0 +1,58 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="nombre-usuario">
+  <template>
+    <style>
+      :host {
+        display: block
+      }
+
+      .name_css {
+        color: #003399;
+        font-size: 1.2em;
+        text-align: center;
+        margin-bottom: 4%;
+      }
+      h1 {
+        margin-bottom: 2%;
+        width: 100%;
+        text-align: center;
+      }
+    </style>
+    <h1>Computed sample</h1>
+    <div class="name_css">
+      [[nombreCompleto]]
+    </div>
+
+  </template>
+
+  <script>
+ 
+    class NombreUsuario extends Polymer.Element {
+      static get is() {
+        return 'nombre-usuario';
+      }
+
+      static get properties() {
+        return {
+          nombre: String,
+          apellidos: String,
+          nombreCompleto: {
+            type: String,
+            computed: 'definirNombreCompleto(nombre, apellidos)'
+          }
+        };
+      }
+
+      constructor() {
+        super();
+      }
+
+      definirNombreCompleto(nombre, apellidos) {
+        return nombre + ' ' + apellidos;
+      }
+    }
+
+    window.customElements.define(NombreUsuario.is, NombreUsuario);
+  </script>
+</dom-module>

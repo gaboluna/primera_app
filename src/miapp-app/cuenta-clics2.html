@@ -1,0 +1,87 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+
+<dom-module id="cuenta-clics2">
+  	<template>
+	    <style>
+			:host {
+				display: block;
+				padding: 5px;
+				border: 1px solid orange;
+				margin-bottom: 5px;
+			}
+			p {
+				margin-top: 0px;
+				padding: 5px;
+				background-color: darkorange;
+				color: white;
+			}
+	    </style>
+	    
+	    <p>Llevas [[contador]] clics</p>
+	    <button on-click="incrementarClic">Clic para contar</button>
+	    <button on-click="resetear">Resetear la cuenta</button>
+
+	    <paper-input label="Email" value="{{email}}"></paper-input>
+
+	    <iron-icon icon="{{icono}}"></iron-icon>
+
+  	</template>
+
+  	<script>
+		/**
+		* @customElement
+		* @polymer
+		*/
+		class CuentaClics2 extends Polymer.Element {
+			static get is() { return 'cuenta-clics2'; }
+			static get properties() {
+				return {
+					contador: {
+						type: Number,
+						value: 0
+					},
+					email: {
+						type: String,
+						observer: 'observaEmail'
+						//computed: 'funcion'
+					},
+					icono: {
+						type: String,
+						value: "icons:clear"
+					}
+				};
+			}
+
+			constructor() {
+				super();
+			}
+
+			incrementarClic(e) {
+				this.contador++;
+				console.log("Objeto evento", e);
+			}
+
+			resetear() {
+				this.contador = 0;
+			}
+
+			observaEmail(email, e2, e3) {
+				if(this.validateEmail(email)) {
+					this.icono = "icons:check";
+				} else {
+					this.icono = "icons:clear";
+				}
+			}
+
+			validateEmail(email) {
+				var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+				return re.test(email);
+			}
+		}
+
+		window.customElements.define(CuentaClics2.is, CuentaClics2);
+  	</script>
+</dom-module>

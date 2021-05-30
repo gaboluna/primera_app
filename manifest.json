@@ -1,0 +1,6 @@
+{
+  "name": "miapp",
+  "short_name": "miapp",
+  "start_url": "/",
+  "display": "standalone"
+}

@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>miapp</title>
+    <meta name="description" content="miapp description">
+
+    <!-- See https://goo.gl/OOhYW5 -->
+    <link rel="manifest" href="/manifest.json">
+
+    <script src="/bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+
+    <link rel="import" href="/src/miapp-app/miapp-app.html">
+
+    <link rel="import" href="/src/miapp-app/ciclo-vida.html">
+
+    <link rel="import" href="/src/miapp-app/binding-example.html">
+
+    <link rel="import" href="/src/miapp-app/cuenta-clics.html">
+
+    <link rel="import" href="/src/miapp-app/cuenta-clics2.html">
+
+    <link rel="import" href="/src/miapp-app/observer-complejo.html">
+
+    <link rel="import" href="/src/miapp-app/computed-sample.html">
+  </head>
+  <body>
+    <h1>Uso del componente ciclo de vida</h1>
+    <p>Se colocan dos elementos en el body y se generan dos elementos en la memoria de Javascript</p>
+    <P>Pulsa ademas los botones para poder producir cambios en el estado de un elemento y ver los otros mens</p>
+    <miapp-app></miapp-app>
+
+    <ciclo-vida></ciclo-vida>
+    <ciclo-vida></ciclo-vida>
+
+    <button id="anadirAlDom">Añadir un elemento al DOM</button>
+    <button id="eliminarDelDom">Eliminar un elemento del DOM</button>
+    <button id="cambiarAttributo">Cambiar un atributo de elemento</button>
+
+    <br><br><br>
+
+    <binding-example profesion="Aprendiendo"></binding-example>
+
+    <br><br><br>
+
+    <cuenta-clics></cuenta-clics>
+    
+    <br><br><br>
+
+    <cuenta-clics2></cuenta-clics2>
+    
+    <br><br><br>
+
+    <observer-complejo calificacion1="6" calificacion2="5" calificacion3="8"></observer-complejo>
+    
+    <br><br><br>
+
+    <nombre-usuario nombre="Charly" apellidos="Brown"></nombre-usuario>
+
+    <script>
+      var el1 = document.createElement("ciclo-vida");
+      el1.setAttribute("id", "el1");
+
+      document.getElementById("anadirAlDom").addEventListener("click", function() {
+        document.body.appendChild(el1);
+      });
+
+
+      document.getElementById("eliminarDelDom").addEventListener("click", function() {
+        document.body.removeChild(document.getElementById("el1"));
+      });
+
+
+      document.getElementById("cambiarAttributo").addEventListener("click", function() {
+        el1.setAttribute("test", "valortest" + new Date());
+
+        console.log(el1);
+
+      });
+
+
+      //var el2 = new CicloVida();
+
+
+    </script>
+  </body>
+</html>

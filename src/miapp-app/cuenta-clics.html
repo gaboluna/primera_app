@@ -1,0 +1,59 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="binding-example.html">
+
+<dom-module id="cuenta-clics">
+  	<template>
+	    <style>
+			:host {
+				display: block;
+				padding: 5px;
+				border: 1px solid orange;
+				margin-bottom: 5px;
+			}
+			p {
+				margin-top: 0px;
+				padding: 5px;
+				background-color: darkorange;
+				color: white;
+			}
+	    </style>
+	    
+	    <p>Llevas [[contador]] clics {{profesion}}</p>
+	    <button on-click="incrementarClic">Clic para contar</button>
+	    <button on-click="resetear">Resetear la cuenta</button>
+
+  	</template>
+
+  	<script>
+		/**
+		* @customElement
+		* @polymer
+		*/
+		class CuentaClics extends BindingExample {
+			static get is() { return 'cuenta-clics'; }
+			static get properties() {
+				return {
+					contador: {
+						type: Number,
+						value: 0
+					}
+				};
+			}
+
+			constructor() {
+				super();
+			}
+
+			incrementarClic(e) {
+				this.contador++;
+				console.log("Objeto evento", e);
+			}
+
+			resetear() {
+				this.contador = 0;
+			}
+		}
+
+		window.customElements.define(CuentaClics.is, CuentaClics);
+  	</script>
+</dom-module>
