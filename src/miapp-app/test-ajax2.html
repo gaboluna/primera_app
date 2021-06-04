@@ -1,0 +1,116 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+
+<dom-module id="test-ajax2">
+    <template>
+        <style>
+            :host {
+            }
+
+            div {
+                text-align: center;
+                margin: 0 5% 5%;
+                border: 1px solid darkblue;
+                padding: 4%;
+            }
+
+            button {
+                background-color: turquoise;
+                border-color: turquoise;
+                border-radius: 0px;
+                padding: 10px 22px;
+                border-style: none;
+                cursor: pointer;
+            }
+
+            h1 {
+                text-transform: uppercase;
+            }
+
+            ul {
+                list-style-type: none;
+            }
+
+            ul li {
+                margin-bottom: 10px;
+            }
+        </style>
+
+        <iron-ajax
+            id="elajax"
+            url="http://jsonplaceholder.typicode.com/users"
+            handle-as="json"
+            last-response="{{users}}"
+            loading="{{cargando}}"
+        ></iron-ajax>
+
+        <div>
+            <button on-tap="buscar">
+                Probar iron-ajax2
+            </button>
+
+            <ul>
+                <template is="dom-repeat" items="[[users]]">
+                    <li>[[item.name]]</li>
+                </template>
+            </ul>
+        </div>
+    </template>
+
+    <script>
+        /*Polymer({
+            is: "test-ajax"
+        });*/
+
+        /*class TestAjax extends Polymer.Element {
+            static get is() { return 'test-ajax'; }
+            static get template() {
+                return html`
+                    <iron-ajax
+                    auto
+                    url="https://www.googleapis.com/youtube/v3/search"
+                    params='{"part":"snippet", "q":"polymer", "key": "YOUTUBE_API_KEY", "type": "video"}'
+                    handle-as="json"
+                    on-response="handleResponse"
+                    debounce-duration="300">
+                    </iron-ajax>
+                    `;
+            }
+        }
+
+        customElements.define(TestAjax.is, TestAjax);*/
+
+        Polymer({
+                is: "test-ajax2",
+
+                properties: {
+                users: Array,
+            },
+
+            buscar: function() {
+                this.$.elajax.generateRequest();
+            }/*,
+
+            respuestaRecibida: function(e, request) {
+                var txt_json = request.__data.response;
+
+                console.log(txt_json);
+
+                if(request.succeeded) {
+                    this.mensaje = 'la solicitud se resolvió correctamente con código ' + request.status;
+
+                    this.root.children[2].getElementsByClassName("pretty_text")[0].innerHTML = '<b>Nombre: </b>' + txt_json.name + '<br><b>Email: </b>' + txt_json.email;
+
+                    this.json_respuesta = JSON.stringify(txt_json);
+                } else {
+                    this.mensaje = 'la solicitud nos ofreció resultados incorrectos, con código ' + request.status
+                }
+            },
+
+            errorRecibido: function(e, error) {
+                console.log(error.request.status);
+                this.mensaje = 'Error en la solicitud, con código ' + error.request.status;
+            }*/
+        });
+    </script>
+</dom-module>
